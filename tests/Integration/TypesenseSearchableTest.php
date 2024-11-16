@@ -23,6 +23,30 @@ class TypesenseSearchableTest extends TestCase
     protected function defineEnvironment($app)
     {
         $this->defineScoutEnvironment($app);
+
+        $app['config']->set('scout.typesense.model-settings', [
+            SearchableUser::class => [
+                'collection-schema' => [
+                    'fields' => [
+                        [
+                            'name' => 'id',
+                            'type' => 'string',
+                        ],
+                        [
+                            'name' => 'name',
+                            'type' => 'string',
+                        ],
+                        [
+                            'name' => 'email',
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+                'search-parameters' => [
+                    'query_by' => 'name'
+                ],
+            ],
+        ]);
     }
 
     /**
