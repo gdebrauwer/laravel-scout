@@ -163,10 +163,38 @@ class AlgoliaSearchableTest extends TestCase
 
     public function test_it_can_use_paginated_search_with_after_raw_search_callback()
     {
-        $rawResults = $this->itCanAccessRawSearchResultsUsingAfterRawSearchCallback();
+        $rawResults = $this->itCanAccessRawSearchResultsOfPaginateUsingAfterRawSearchCallback();
 
         $this->assertIsArray($rawResults);
-        dump($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+    }
+
+    public function test_it_can_use_raw_paginated_search_with_after_raw_search_callback()
+    {
+        $rawResults = $this->itCanAccessRawSearchResultsOfPaginateRawUsingAfterRawSearchCallback();
+
+        $this->assertIsArray($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+    }
+
+    public function test_it_can_use_simple_paginated_search_with_after_raw_search_callback()
+    {
+        $rawResults = $this->itCanAccessRawSearchResultsOfSimplePaginateUsingAfterRawSearchCallback();
+
+        $this->assertIsArray($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+    }
+
+    public function test_it_can_use_raw_simple_paginated_search_with_after_raw_search_callback()
+    {
+        $rawResults = $this->itCanAccessRawSearchResultsOfSimplePaginateRawUsingAfterRawSearchCallback();
+
+        $this->assertIsArray($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('processingTimeMS', $rawResults);
     }
 
     protected static function scoutDriver(): string

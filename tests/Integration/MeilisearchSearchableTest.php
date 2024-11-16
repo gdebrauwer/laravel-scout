@@ -191,7 +191,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
-        $this->assertArrayHasKey('query', $rawResults);
+        $this->assertArrayHasKey('processingTimeMs', $rawResults);
     }
 
     public function test_it_can_use_raw_paginated_search_with_after_raw_search_callback()
@@ -200,7 +200,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
-        $this->assertArrayHasKey('query', $rawResults);
+        $this->assertArrayHasKey('processingTimeMs', $rawResults);
     }
 
     public function test_it_can_use_simple_paginated_search_with_after_raw_search_callback()
@@ -209,7 +209,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
-        $this->assertArrayHasKey('query', $rawResults);
+        $this->assertArrayHasKey('processingTimeMs', $rawResults);
     }
 
     public function test_it_can_use_raw_simple_paginated_search_with_after_raw_search_callback()
@@ -218,7 +218,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
-        $this->assertArrayHasKey('query', $rawResults);
+        $this->assertArrayHasKey('processingTimeMs', $rawResults);
     }
 
     protected static function scoutDriver(): string
