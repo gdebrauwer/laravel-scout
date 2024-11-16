@@ -67,6 +67,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_basic_search()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         dump((new SearchableUser())->searchableUsing()->getCollections()->retrieve());
 
         $results = $this->itCanUseBasicSearch();
