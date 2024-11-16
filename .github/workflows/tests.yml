@@ -98,7 +98,15 @@ jobs:
 
     services:
         typesense:
-          image: typesense/typesense:26.0
+            image: typesense/typesense:27.0
+            ports:
+            - 8108:8108/tcp
+            volumes:
+            - /tmp/typesense-server-data:/data
+            env:
+                TYPESENSE_DATA_DIR: /data
+                TYPESENSE_API_KEY: xyz
+                TYPESENSE_ENABLE_CORS: true
 
     strategy:
       fail-fast: true
@@ -110,20 +118,6 @@ jobs:
     steps:
         - name: Checkout code
           uses: actions/checkout@v4
-
-        - name: Start Typesense
-          run: |
-            docker run -d \
-            -p 8108:8108 \
-            --name typesense \
-            -v /tmp/typesense-data:/data \
-            typesense/typesense:26.0 \
-            --api-key=xyz \
-            --data-dir /data \
-            --enable-cors
-
-        - name: Curl Typesense
-          run: sleep 1 && curl http://localhost:8108/health
 
         - name: Setup PHP
           uses: shivammathur/setup-php@v2
