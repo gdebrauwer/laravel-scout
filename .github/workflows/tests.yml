@@ -98,7 +98,7 @@ jobs:
 
     services:
         typesense:
-          image: typesense/typesense:27.0
+          image: typesense/typesense:26.0
 
     strategy:
       fail-fast: true
@@ -117,7 +117,7 @@ jobs:
             -p 8108:8108 \
             --name typesense \
             -v /tmp/typesense-data:/data \
-            typesense/typesense:27.0 \
+            typesense/typesense:26.0 \
             --api-key=xyz \
             --data-dir /data \
             --enable-cors
