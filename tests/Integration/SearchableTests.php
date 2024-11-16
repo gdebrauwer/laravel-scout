@@ -121,7 +121,7 @@ trait SearchableTests
         return SearchableUser::search('*')->query($queryCallback)->paginate();
     }
 
-    protected function itCanAccessRawSearchResultsUsingAfterRawSearchCallback()
+    protected function itCanAccessRawSearchResultsOfPaginateUsingAfterRawSearchCallback()
     {
         $result = null;
 
@@ -130,6 +130,45 @@ trait SearchableTests
                 $result = $rawSearchResult;
             })
             ->paginate();
+
+        return $result;
+    }
+
+    protected function itCanAccessRawSearchResultsOfPaginateRawUsingAfterRawSearchCallback()
+    {
+        $result = null;
+
+        SearchableUser::search('*')
+            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+                $result = $rawSearchResult;
+            })
+            ->paginateRaw();
+
+        return $result;
+    }
+
+    protected function itCanAccessRawSearchResultsOfSimplePaginateUsingAfterRawSearchCallback()
+    {
+        $result = null;
+
+        SearchableUser::search('*')
+            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+                $result = $rawSearchResult;
+            })
+            ->simplePaginate();
+
+        return $result;
+    }
+
+    protected function itCanAccessRawSearchResultsOfSimplePaginateRawUsingAfterRawSearchCallback()
+    {
+        $result = null;
+
+        SearchableUser::search('*')
+            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+                $result = $rawSearchResult;
+            })
+            ->simplePaginateRaw();
 
         return $result;
     }
