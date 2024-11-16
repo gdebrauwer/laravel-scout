@@ -187,7 +187,6 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_usePaginatedSearchWithEmptyQueryCallback()
     {
-        dd(config('scout'));
         $res = $this->itCanUsePaginatedSearchWithEmptyQueryCallback();
 
         $this->assertSame($res->total(), 44);
