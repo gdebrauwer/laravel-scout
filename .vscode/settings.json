@@ -1,0 +1,4 @@
+{
+    "better-phpunit.docker.enable": false,
+    "better-phpunit.commandSuffix": null,
+}

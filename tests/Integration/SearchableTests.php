@@ -120,4 +120,17 @@ trait SearchableTests
 
         return SearchableUser::search('*')->query($queryCallback)->paginate();
     }
+
+    protected function itCanAccessRawSearchResultsUsingAfterRawSearchCallback()
+    {
+        $result = null;
+
+        SearchableUser::search('*')
+            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+                $result = $rawSearchResult;
+            })
+            ->paginate();
+
+        return $result;
+    }
 }

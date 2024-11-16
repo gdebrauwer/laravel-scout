@@ -185,6 +185,13 @@ class MeilisearchSearchableTest extends TestCase
         ], $page2->pluck('name', 'id')->all());
     }
 
+    public function test_it_can_use_paginated_search_with_after_raw_search_callback()
+    {
+        $rawResults = $this->itCanAccessRawSearchResultsUsingAfterRawSearchCallback();
+
+        dd($rawResults);
+    }
+
     protected static function scoutDriver(): string
     {
         return 'meilisearch';
