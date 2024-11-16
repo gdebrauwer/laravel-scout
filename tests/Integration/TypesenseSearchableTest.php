@@ -96,6 +96,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_basic_search_with_query_callback()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         $results = $this->itCanUseBasicSearchWithQueryCallback();
 
         $this->assertSame([
@@ -111,6 +113,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_basic_search_to_fetch_keys()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         $results = $this->itCanUseBasicSearchToFetchKeys();
 
         $this->assertSame([
@@ -129,6 +133,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_basic_search_with_query_callback_to_fetch_keys()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         $results = $this->itCanUseBasicSearchWithQueryCallbackToFetchKeys();
 
         $this->assertSame([
@@ -147,6 +153,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_return_same_keys_with_query_callback()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         $this->assertSame(
             $this->itCanUseBasicSearchToFetchKeys()->all(),
             $this->itCanUseBasicSearchWithQueryCallbackToFetchKeys()->all()
@@ -155,6 +163,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_paginated_search()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         [$page1, $page2] = $this->itCanUsePaginatedSearch();
 
         $this->assertSame([
@@ -176,6 +186,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_paginated_search_with_query_callback()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         [$page1, $page2] = $this->itCanUsePaginatedSearchWithQueryCallback();
 
         $this->assertSame([
@@ -194,6 +206,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_usePaginatedSearchWithEmptyQueryCallback()
     {
+        $this->importScoutIndexFrom(SearchableUser::class);
+
         $res = $this->itCanUsePaginatedSearchWithEmptyQueryCallback();
 
         $this->assertSame($res->total(), 44);
