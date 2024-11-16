@@ -189,7 +189,9 @@ class MeilisearchSearchableTest extends TestCase
     {
         $rawResults = $this->itCanAccessRawSearchResultsUsingAfterRawSearchCallback();
 
-        dd($rawResults);
+        $this->assertIsArray($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('query', $rawResults);
     }
 
     protected static function scoutDriver(): string
