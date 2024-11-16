@@ -167,6 +167,8 @@ class TypesenseSearchableTest extends TestCase
 
         $this->assertSame($res->total(), 44);
         $this->assertSame($res->lastPage(), 3);
+
+        dd(config('scout'));
     }
 
     protected static function scoutDriver(): string
