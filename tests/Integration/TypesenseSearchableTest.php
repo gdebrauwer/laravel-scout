@@ -36,10 +36,6 @@ class TypesenseSearchableTest extends TestCase
                             'name' => 'name',
                             'type' => 'string',
                         ],
-                        [
-                            'name' => 'email',
-                            'type' => 'string',
-                        ],
                     ],
                 ],
                 'search-parameters' => [
@@ -71,6 +67,8 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_can_use_basic_search()
     {
+        dump((new SearchableUser())->searchableUsing()->getCollections()->retrieve());
+
         $results = $this->itCanUseBasicSearch();
 
         $this->assertSame([
