@@ -24,6 +24,13 @@ class TypesenseSearchableTest extends TestCase
     {
         $this->defineScoutEnvironment($app);
 
+        $_ENV['user.toSearchableArray'] = function ($model) {
+            return [
+                'id' => (string) $model->id,
+                'name' => $model->name,
+            ];
+        };
+
         $app['config']->set('scout.typesense.model-settings', [
             SearchableUser::class => [
                 'collection-schema' => [
