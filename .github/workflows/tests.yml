@@ -139,7 +139,7 @@ jobs:
             composer update --prefer-dist --no-interaction --no-progress
 
         - name: Execute tests
-          run: vendor/bin/phpunit --no-configuration --no-coverage --color --bootstrap vendor/autoload.php --group meilisearch tests/Integration
+          run: vendor/bin/phpunit --no-configuration --no-coverage --color --bootstrap vendor/autoload.php --group typesense tests/Integration
           env:
             TYPESENSE_HOST: "http://localhost:7700"
             TYPESENSE_API_KEY: 'xyz'
