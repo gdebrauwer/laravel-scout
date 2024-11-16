@@ -141,6 +141,6 @@ jobs:
         - name: Execute tests
           run: vendor/bin/phpunit --no-configuration --no-coverage --color --bootstrap vendor/autoload.php --group typesense tests/Integration
           env:
-            TYPESENSE_HOST: "http://localhost:7700"
+            TYPESENSE_HOST: "http://localhost:8108"
             TYPESENSE_API_KEY: 'xyz'
             DB_CONNECTION: 'testing'
