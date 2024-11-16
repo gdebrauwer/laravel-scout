@@ -17,7 +17,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
             artisan($this, 'scout:index', ['name' => $model]);
         }
 
-        artisan($this, 'scout:import', ['model' => $model]);
+        dump(artisan($this, 'scout:import', ['model' => $model]));
 
         sleep(1);
     }
