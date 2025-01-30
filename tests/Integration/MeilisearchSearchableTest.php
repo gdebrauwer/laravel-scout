@@ -227,8 +227,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
-        dd($rawResults);
-        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+        $this->assertArrayHasKey('processingTimeMs', $rawResults);
     }
 
     public function test_it_can_use_raw_cursor_search_with_after_raw_search_callback()
@@ -237,8 +236,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
-        dd($rawResults);
-        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+        $this->assertArrayHasKey('processingTimeMs', $rawResults);
     }
 
     protected static function scoutDriver(): string
