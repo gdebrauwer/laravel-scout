@@ -227,6 +227,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
+        dump($rawResults);
         $this->assertArrayHasKey('processingTimeMS', $rawResults);
     }
 
@@ -236,6 +237,7 @@ class MeilisearchSearchableTest extends TestCase
 
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
+        dump($rawResults);
         $this->assertArrayHasKey('processingTimeMS', $rawResults);
     }
 
