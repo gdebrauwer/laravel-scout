@@ -3,8 +3,8 @@ name: tests
 on:
   push:
     branches:
-        - master
-        - '*.x'
+      - master
+      - '*.x'
   pull_request:
   schedule:
     - cron: '0 0 * * *'
