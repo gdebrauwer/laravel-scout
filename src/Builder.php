@@ -541,7 +541,7 @@ class Builder
      * @param  mixed  $results
      * @return mixed
      */
-    protected function applyAfterRawSearchCallback($results)
+    public function applyAfterRawSearchCallback($results)
     {
         if ($this->afterRawSearchCallback) {
             call_user_func($this->afterRawSearchCallback, $results);

@@ -172,4 +172,30 @@ trait SearchableTests
 
         return $result;
     }
+
+    protected function itCanAccessRawSearchResultsOfGetUsingAfterRawSearchCallback()
+    {
+        $result = null;
+
+        SearchableUser::search('*')
+            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+                $result = $rawSearchResult;
+            })
+            ->get();
+
+        return $result;
+    }
+
+    protected function itCanAccessRawSearchResultsOfCursorUsingAfterRawSearchCallback()
+    {
+        $result = null;
+
+        SearchableUser::search('*')
+            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+                $result = $rawSearchResult;
+            })
+            ->cursor();
+
+        return $result;
+    }
 }

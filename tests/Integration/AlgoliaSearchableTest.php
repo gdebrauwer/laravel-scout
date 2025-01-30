@@ -197,6 +197,24 @@ class AlgoliaSearchableTest extends TestCase
         $this->assertArrayHasKey('processingTimeMS', $rawResults);
     }
 
+    public function test_it_can_use_raw_get_search_with_after_raw_search_callback()
+    {
+        $rawResults = $this->itCanAccessRawSearchResultsOfGetUsingAfterRawSearchCallback();
+
+        $this->assertIsArray($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+    }
+
+    public function test_it_can_use_raw_cursor_search_with_after_raw_search_callback()
+    {
+        $rawResults = $this->itCanAccessRawSearchResultsOfCursorUsingAfterRawSearchCallback();
+
+        $this->assertIsArray($rawResults);
+        $this->assertArrayHasKey('hits', $rawResults);
+        $this->assertArrayHasKey('processingTimeMS', $rawResults);
+    }
+
     protected static function scoutDriver(): string
     {
         return 'algolia';
