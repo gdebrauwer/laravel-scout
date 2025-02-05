@@ -126,7 +126,7 @@ trait SearchableTests
         $result = null;
 
         SearchableUser::search('*')
-            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+            ->withRawResults(function ($rawSearchResult) use (&$result) {
                 $result = $rawSearchResult;
             })
             ->paginate();
@@ -139,7 +139,7 @@ trait SearchableTests
         $result = null;
 
         SearchableUser::search('*')
-            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+            ->withRawResults(function ($rawSearchResult) use (&$result) {
                 $result = $rawSearchResult;
             })
             ->paginateRaw();
@@ -152,7 +152,7 @@ trait SearchableTests
         $result = null;
 
         SearchableUser::search('*')
-            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+            ->withRawResults(function ($rawSearchResult) use (&$result) {
                 $result = $rawSearchResult;
             })
             ->simplePaginate();
@@ -165,7 +165,7 @@ trait SearchableTests
         $result = null;
 
         SearchableUser::search('*')
-            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+            ->withRawResults(function ($rawSearchResult) use (&$result) {
                 $result = $rawSearchResult;
             })
             ->simplePaginateRaw();
@@ -178,7 +178,7 @@ trait SearchableTests
         $result = null;
 
         SearchableUser::search('*')
-            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+            ->withRawResults(function ($rawSearchResult) use (&$result) {
                 $result = $rawSearchResult;
             })
             ->get();
@@ -191,7 +191,7 @@ trait SearchableTests
         $result = null;
 
         SearchableUser::search('*')
-            ->afterRawSearch(function ($rawSearchResult) use (&$result) {
+            ->withRawResults(function ($rawSearchResult) use (&$result) {
                 $result = $rawSearchResult;
             })
             ->cursor();

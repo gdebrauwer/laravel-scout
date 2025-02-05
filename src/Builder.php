@@ -288,19 +288,6 @@ class Builder
     }
 
     /**
-     * Set the callback that should have an opportunity to inspect the raw result returned by the search engine.
-     *
-     * @param  callable  $callback
-     * @return $this
-     */
-    public function afterRawSearch($callback)
-    {
-        $this->afterRawSearchCallback = $callback;
-
-        return $this;
-    }
-
-    /**
      * Get the raw results of the search.
      *
      * @return mixed
@@ -308,6 +295,19 @@ class Builder
     public function raw()
     {
         return $this->engine()->search($this);
+    }
+
+    /**
+     * Set the callback that should have an opportunity to inspect and modify the raw result returned by the search engine.
+     *
+     * @param  callable  $callback
+     * @return $this
+     */
+    public function withRawResults($callback)
+    {
+        $this->afterRawSearchCallback = $callback;
+
+        return $this;
     }
 
     /**
