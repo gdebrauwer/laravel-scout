@@ -4,6 +4,7 @@ namespace Laravel\Scout\Tests\Integration;
 
 use Orchestra\Testbench\Attributes\RequiresEnv;
 use Workbench\App\Models\SearchableUser;
+use Workbench\Database\Factories\UserFactory;
 
 /**
  * @group typesense
@@ -236,6 +237,11 @@ class TypesenseSearchableTest extends TestCase
         // Verify the page was adjusted correctly
         $this->assertEquals($expectedPage, $results->currentPage());
         $this->assertEquals($perPage, $results->perPage());
+    }
+
+    public function test_it_can_filter_with_where_comparisons()
+    {
+        $this->itCanMakeWhereComparisons();
     }
 
     protected static function scoutDriver(): string

@@ -69,8 +69,8 @@ class TypesenseEngineTest extends TestCase
     {
         $builder = m::mock(Builder::class);
         $builder->wheres = [
-            'status' => 'active',
-            'age' => 25,
+            ['field' => 'status', 'operator' => '=', 'value' => 'active'],
+            ['field' => 'age', 'operator' => '=', 'value' => 25],
         ];
         $builder->whereIns = [
             'category' => ['electronics', 'books'],
@@ -104,6 +104,12 @@ class TypesenseEngineTest extends TestCase
     {
         $this->assertEquals('status:=active', $this->invokeMethod($this->engine, 'parseWhereFilter', ['active', 'status']));
         $this->assertEquals('age:=25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age']));
+        $this->assertEquals('age:=25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age', '=']));
+        $this->assertEquals('age:>25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age', '>']));
+        $this->assertEquals('age:<25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age', '<']));
+        $this->assertEquals('age:>=25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age', '>=']));
+        $this->assertEquals('age:<=25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age', '<=']));
+        $this->assertEquals('age:!=25', $this->invokeMethod($this->engine, 'parseWhereFilter', ['25', 'age', '!=']));
         $this->assertEquals('tags:tag1tag2tag3', $this->invokeMethod($this->engine, 'parseWhereFilter', [['tag1', 'tag2', 'tag3'], 'tags']));
     }
 

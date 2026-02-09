@@ -433,4 +433,101 @@ class MeilisearchEngineTest extends TestCase
 
         $engine->deleteAllIndexes();
     }
+
+    public function test_where_conditions_with_greater_than_are_applied()
+    {
+        $engine = $this->app->make(EngineManager::class)->engine();
+
+        $builder = new Builder(new SearchableUser, '');
+        $builder->where('age', '>', 30);
+
+        $this->client->shouldReceive('index')->once()->with('users')->andReturn($index = m::mock(Indexes::class));
+        $index->shouldReceive('rawSearch')->once()->with($builder->query, array_filter([
+            'filter' => 'age>30',
+            'hitsPerPage' => $builder->limit,
+        ]))->andReturn([]);
+
+        $engine->search($builder);
+    }
+
+    public function test_where_conditions_with_less_than_are_applied()
+    {
+        $engine = $this->app->make(EngineManager::class)->engine();
+
+        $builder = new Builder(new SearchableUser, '');
+        $builder->where('age', '<', 35);
+
+        $this->client->shouldReceive('index')->once()->with('users')->andReturn($index = m::mock(Indexes::class));
+        $index->shouldReceive('rawSearch')->once()->with($builder->query, array_filter([
+            'filter' => 'age<35',
+            'hitsPerPage' => $builder->limit,
+        ]))->andReturn([]);
+
+        $engine->search($builder);
+    }
+
+    public function test_where_conditions_with_greater_than_or_equal_are_applied()
+    {
+        $engine = $this->app->make(EngineManager::class)->engine();
+
+        $builder = new Builder(new SearchableUser, '');
+        $builder->where('age', '>=', 35);
+
+        $this->client->shouldReceive('index')->once()->with('users')->andReturn($index = m::mock(Indexes::class));
+        $index->shouldReceive('rawSearch')->once()->with($builder->query, array_filter([
+            'filter' => 'age>=35',
+            'hitsPerPage' => $builder->limit,
+        ]))->andReturn([]);
+
+        $engine->search($builder);
+    }
+
+    public function test_where_conditions_with_less_than_or_equal_are_applied()
+    {
+        $engine = $this->app->make(EngineManager::class)->engine();
+
+        $builder = new Builder(new SearchableUser, '');
+        $builder->where('age', '<=', 30);
+
+        $this->client->shouldReceive('index')->once()->with('users')->andReturn($index = m::mock(Indexes::class));
+        $index->shouldReceive('rawSearch')->once()->with($builder->query, array_filter([
+            'filter' => 'age<=30',
+            'hitsPerPage' => $builder->limit,
+        ]))->andReturn([]);
+
+        $engine->search($builder);
+    }
+
+    public function test_where_conditions_with_not_equal_are_applied()
+    {
+        $engine = $this->app->make(EngineManager::class)->engine();
+
+        $builder = new Builder(new SearchableUser, '');
+        $builder->where('age', '!=', 30);
+
+        $this->client->shouldReceive('index')->once()->with('users')->andReturn($index = m::mock(Indexes::class));
+        $index->shouldReceive('rawSearch')->once()->with($builder->query, array_filter([
+            'filter' => 'age!=30',
+            'hitsPerPage' => $builder->limit,
+        ]))->andReturn([]);
+
+        $engine->search($builder);
+    }
+
+    public function test_multiple_where_comparison_conditions_are_applied()
+    {
+        $engine = $this->app->make(EngineManager::class)->engine();
+
+        $builder = new Builder(new SearchableUser, '');
+        $builder->where('age', '>', 30);
+        $builder->where('age', '<', 40);
+
+        $this->client->shouldReceive('index')->once()->with('users')->andReturn($index = m::mock(Indexes::class));
+        $index->shouldReceive('rawSearch')->once()->with($builder->query, array_filter([
+            'filter' => 'age>30 AND age<40',
+            'hitsPerPage' => $builder->limit,
+        ]))->andReturn([]);
+
+        $engine->search($builder);
+    }
 }

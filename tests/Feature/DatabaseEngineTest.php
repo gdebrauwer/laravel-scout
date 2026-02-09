@@ -27,11 +27,13 @@ class DatabaseEngineTest extends TestCase
         SearchableUserFactory::new()->create([
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
+            'age' => 35,
         ]);
 
         SearchableUserFactory::new()->create([
             'name' => 'Abigail Otwell',
             'email' => 'abigail@laravel.com',
+            'age' => 30,
         ]);
     }
 
@@ -52,7 +54,7 @@ class DatabaseEngineTest extends TestCase
     public function test_it_adds_search_where_clauses_with_non_empty_search()
     {
         SearchableUser::search('Taylor')->query(function ($builder) {
-            $this->assertSame('select * from "users" where ("users"."id" like ? or "users"."name" like ? or "users"."email" like ?)', $builder->toSql());
+            $this->assertSame('select * from "users" where ("users"."id" like ? or "users"."name" like ? or "users"."email" like ? or "users"."age" like ?)', $builder->toSql());
         })->get();
     }
 
@@ -203,5 +205,71 @@ class DatabaseEngineTest extends TestCase
         $this->assertCount(1, $models);
         $this->assertEquals('laravel', $models[0]->label);
         $this->assertEquals('This chirp is searchable', $models[0]->chirp->content);
+    }
+
+    public function test_it_can_filter_with_greater_than()
+    {
+        $models = SearchableUser::search()->where('age', '>', 30)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Taylor Otwell', $models[0]->name);
+    }
+
+    public function test_it_can_filter_with_less_than()
+    {
+        $models = SearchableUser::search()->where('age', '<', 35)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Abigail Otwell', $models[0]->name);
+    }
+
+    public function test_it_can_filter_with_greater_than_or_equal()
+    {
+        $models = SearchableUser::search()->where('age', '>=', 35)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Taylor Otwell', $models[0]->name);
+
+        $models = SearchableUser::search()->where('age', '>=', 30)->get();
+
+        $this->assertCount(2, $models);
+    }
+
+    public function test_it_can_filter_with_less_than_or_equal()
+    {
+        $models = SearchableUser::search()->where('age', '<=', 30)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Abigail Otwell', $models[0]->name);
+
+        $models = SearchableUser::search()->where('age', '<=', 35)->get();
+
+        $this->assertCount(2, $models);
+    }
+
+    public function test_it_can_filter_with_not_equal()
+    {
+        $models = SearchableUser::search()->where('age', '!=', 30)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Taylor Otwell', $models[0]->name);
+
+        $models = SearchableUser::search()->where('age', '!=', 35)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Abigail Otwell', $models[0]->name);
+    }
+
+    public function test_it_can_filter_with_multiple_where_comparisons()
+    {
+        $models = SearchableUser::search()->where('age', '>', 30)->where('age', '<', 40)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Taylor Otwell', $models[0]->name);
+
+        $models = SearchableUser::search()->where('age', '>', 25)->where('age', '<', 35)->get();
+
+        $this->assertCount(1, $models);
+        $this->assertEquals('Abigail Otwell', $models[0]->name);
     }
 }

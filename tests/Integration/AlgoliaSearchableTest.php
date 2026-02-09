@@ -216,6 +216,11 @@ class AlgoliaSearchableTest extends TestCase
         $this->assertArrayHasKey('processingTimeMS', $rawResults);
     }
 
+    public function test_it_can_filter_with_where_comparisons()
+    {
+        $this->itCanMakeWhereComparisons();
+    }
+
     /** {@inheritdoc} */
     #[\Override]
     protected static function flushIndexesFromScout(): void

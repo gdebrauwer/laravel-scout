@@ -11,6 +11,7 @@ use Meilisearch\Endpoints\Indexes;
 use Mockery as m;
 use Orchestra\Testbench\Attributes\RequiresEnv;
 use Workbench\App\Models\SearchableUser;
+use Workbench\Database\Factories\UserFactory;
 
 /**
  * @group meilisearch
@@ -32,6 +33,8 @@ class MeilisearchSearchableTest extends TestCase
     protected function defineEnvironment($app)
     {
         $this->defineScoutEnvironment($app);
+
+        $app['config']->set('scout.meilisearch.index-settings.' . SearchableUser::class . '.filterableAttributes', ['age']);
     }
 
     /**
@@ -237,6 +240,11 @@ class MeilisearchSearchableTest extends TestCase
         $this->assertIsArray($rawResults);
         $this->assertArrayHasKey('hits', $rawResults);
         $this->assertArrayHasKey('processingTimeMs', $rawResults);
+    }
+
+    public function test_it_can_filter_with_where_comparisons()
+    {
+        $this->itCanMakeWhereComparisons();
     }
 
     protected static function scoutDriver(): string

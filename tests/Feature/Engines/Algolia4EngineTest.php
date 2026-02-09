@@ -47,7 +47,7 @@ class Algolia4EngineTest extends TestCase
 
     public function test_update_adds_objects_to_index()
     {
-        $model = SearchableUserFactory::new()->createQuietly();
+        $model = SearchableUserFactory::new()->createQuietly(['age' => rand(1, 100)]);
 
         $engine = $this->app->make(EngineManager::class)->engine();
 
@@ -55,6 +55,7 @@ class Algolia4EngineTest extends TestCase
             'id' => $model->getKey(),
             'name' => $model->name,
             'email' => $model->email,
+            'age' => $model->age,
             'objectID' => $model->getScoutKey(),
         ]]);
 
