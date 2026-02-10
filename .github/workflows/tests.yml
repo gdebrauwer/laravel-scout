@@ -2,9 +2,6 @@ name: tests
 
 on:
   push:
-    branches:
-      - master
-      - '*.x'
   pull_request:
   schedule:
     - cron: '0 0 * * *'
@@ -123,7 +120,7 @@ jobs:
       - name: Start Typesense
         uses: jirevwe/typesense-github-action@v1.0.1
         with:
-          typesense-version: 30.1
+          typesense-version: 28.0
           typesense-api-key: masterKey
 
       - name: Curl Typesense
