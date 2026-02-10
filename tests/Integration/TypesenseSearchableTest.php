@@ -250,8 +250,9 @@ class TypesenseSearchableTest extends TestCase
             ->paginate($perPage, null, $overflowPage);
 
         // Verify the page was adjusted correctly
-        $this->assertEquals($expectedPage, $results->currentPage());
+        $this->assertEquals($overflowPage, $results->currentPage());
         $this->assertEquals($perPage, $results->perPage());
+        $this->assertCount(0, $results->items());
     }
 
     protected static function scoutDriver(): string
