@@ -120,7 +120,7 @@ jobs:
       - name: Start Typesense
         uses: jirevwe/typesense-github-action@v1.0.1
         with:
-          typesense-version: 28.0
+          typesense-version: '28.0'
           typesense-api-key: masterKey
 
       - name: Curl Typesense
