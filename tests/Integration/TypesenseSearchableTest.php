@@ -241,9 +241,9 @@ class TypesenseSearchableTest extends TestCase
 
     public function test_it_handles_pagination_with_max_int_overflow()
     {
-        $maxInt = 4294967295;
+        $maxInt = 9223372036854775807;
         $perPage = 10;
-        $overflowPage = 4294967296; // max int + 1
+        $overflowPage = 9223372036854775807; // max int + 1
         $expectedPage = floor($maxInt / $perPage);
 
         $results = SearchableUser::search('lar')
